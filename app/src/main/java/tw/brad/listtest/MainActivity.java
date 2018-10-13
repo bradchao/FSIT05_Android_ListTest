@@ -11,7 +11,10 @@ import java.util.LinkedList;
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private SimpleAdapter simpleAdapter;
-    private LinkedList<HashMap<String,String>> data;
+    private LinkedList<HashMap<String,Object>> data;
+
+    private int[] imgs = {R.drawable.img0,R.drawable.img1,
+            R.drawable.img2,R.drawable.img3,};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,49 +26,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initListView(){
-        String[] from = {"brad"};
-        int[] to = {R.id.item_title};
+        String[] from = {"title", "cont", "img"};
+        int[] to = {R.id.item_title, R.id.item_content, R.id.item_img};
         data = new LinkedList<>();
 
-        HashMap<String,String> r0 = new HashMap<>();
-        r0.put(from[0], "Value1");
-        data.add(r0);
-
-        HashMap<String,String> r1 = new HashMap<>();
-        r1.put(from[0], "Value2");
-        data.add(r1);
-
-        HashMap<String,String> r3 = new HashMap<>();
-        r3.put(from[0], "Value1");
-        data.add(r3);
-
-        HashMap<String,String> r4 = new HashMap<>();
-        r4.put(from[0], "Value2");
-        data.add(r4);
-
-        HashMap<String,String> r5 = new HashMap<>();
-        r5.put(from[0], "Value1");
-        data.add(r5);
-
-        HashMap<String,String> r6 = new HashMap<>();
-        r6.put(from[0], "Value2");
-        data.add(r6);
-
-        HashMap<String,String> r7 = new HashMap<>();
-        r7.put(from[0], "Value1");
-        data.add(r7);
-
-        HashMap<String,String> r8 = new HashMap<>();
-        r8.put(from[0], "Value2");
-        data.add(r8);
-
-        HashMap<String,String> r9 = new HashMap<>();
-        r9.put(from[0], "Value1");
-        data.add(r9);
-
-        HashMap<String,String> r10 = new HashMap<>();
-        r10.put(from[0], "Value2");
-        data.add(r10);
+        for (int i=0; i<100; i++){
+            HashMap<String,Object> row = new HashMap<>();
+            row.put(from[0], "title " + i);
+            row.put(from[1], "content " + i);
+            row.put(from[2], imgs[i%4]);
+            data.add(row);
+        }
 
         simpleAdapter = new SimpleAdapter(
                 this, data, R.layout.item,from, to);
